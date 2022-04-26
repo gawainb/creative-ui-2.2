@@ -3,10 +3,12 @@ import React from "react";
 import { Box, Badge, useToken, useColorModeValue } from "@chakra-ui/react";
 import Icon from "@chakra-ui/icon";
 import ReactPlayer from 'react-player/lazy';
+import { useRouter } from 'next/router';
 
 const StarIcon = ({ color }) => <Icon name="star" color={color} />
 
 export default function LiveCampaigns() {
+  const router = useRouter()
   const property = {
     videoUrl: "https://youtu.be/vax0IOXIi44",
     imageAlt: "Pepsi Campaign",
@@ -26,8 +28,13 @@ export default function LiveCampaigns() {
     // a single fallback or fallback array matching the length of the previous arg
   )
 
+  const goTo = () => {
+    router.push('/details/2')
+  };
+
   return (
     <Box 
+      onClick={() => goTo()}
       maxW="sm" 
       borderWidth="1px" 
       rounded="lg" 

@@ -40,6 +40,7 @@ export default function CreativeCard() {
       borderWidth="1px" 
       rounded="lg" 
       overflow="hidden" 
+      alignItems={"center"} 
       margin={5}
       cursor='pointer'
       height="511px" 
