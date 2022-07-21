@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, Badge, useToken, useColorModeValue } from "@chakra-ui/react";
-import Icon from "@chakra-ui/icon";
+import { StarIcon } from "@chakra-ui/icons";
 import ReactPlayer from 'react-player/lazy';
 import { useRouter } from 'next/router';
-
-
-const StarIcon = ({ color }) => <Icon name="star" color={color} />
 
 export default function CreativeCard() {
   const router = useRouter()
@@ -14,10 +11,11 @@ export default function CreativeCard() {
     imageAlt: "Tesla Campaign",
     crtv: 40,
     apr: 18.78,
-    title: "Tesla - Model Y",
+    brand: "Tesla",
+    product: "Model Y",
     formattedPrice: "$79,900.00",
     reviewCount: 34,
-    rating: 4
+    rating: 3
   };
 
   const [brand400, brand200] = useToken(
@@ -36,6 +34,7 @@ export default function CreativeCard() {
     <Box 
       onClick={() => goTo()}
       maxW="sm"
+      minW='sm'
       margin={5} 
       borderWidth="1px" 
       rounded="lg" 
@@ -55,7 +54,7 @@ export default function CreativeCard() {
       />
     
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
+        <Box display="flex" alignItems="baseline">
           <Badge rounded="full" px="2" color={brand400}>
             New
           </Badge>
@@ -76,10 +75,10 @@ export default function CreativeCard() {
           fontWeight="semibold"
           as="h2"
           lineHeight="tight"
-          isTruncated
           color={useColorModeValue("black", "white")}
+          noOfLines={1}
         >
-          {property.title}
+          {property.brand} - {property.product}
         </Box>
 
         <Box color={useColorModeValue("black", "white")}>
@@ -94,7 +93,7 @@ export default function CreativeCard() {
           </Box>
         </Box>
 
-        <Box d="flex" mt="2" alignItems="center">
+        <Box display="flex" mt="2" alignItems="center">
           {Array(5)
             .fill("")
             .map((_, i) => (

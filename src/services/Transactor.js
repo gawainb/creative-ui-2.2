@@ -1,6 +1,5 @@
 import { hexlify } from "@ethersproject/bytes";
 import { parseUnits } from "ethers/lib/utils";
-import { createStandaloneToast } from "@chakra-ui/react";
 import Notify from "bnc-notify";
 import { BLOCKNATIVE_DAPPID } from "../constants";
 
@@ -19,7 +18,7 @@ export default function Transactor(provider, gasPrice, etherscan) {
         dappId: BLOCKNATIVE_DAPPID, // GET YOUR OWN KEY AT https://account.blocknative.com
         system: "ethereum",
         networkId: network.chainId,
-        // darkMode: Boolean, // (default: false)
+        darkMode: Boolean, // (default: false)
         transactionHandler: txInformation => {
           console.log("HANDLE TX", txInformation);
         },
@@ -59,11 +58,11 @@ export default function Transactor(provider, gasPrice, etherscan) {
           const { emitter } = notify.hash(result.hash);
           emitter.on("all", transaction => {
             return {
-              onclick: () => window.open((etherscan || etherscanTxUrl) + transaction.hash),
+              onclick: () => typeof window !== 'undefined' ? window.open((etherscan || etherscanTxUrl) + transaction.hash) : () => {},
             };
           });
         } else {
-          createStandaloneToast.info({
+          toast.info({
             message: "Local Transaction Sent",
             description: result.hash,
             placement: "bottomRight",
@@ -74,7 +73,7 @@ export default function Transactor(provider, gasPrice, etherscan) {
       } catch (e) {
         console.log(e);
         console.log("Transaction Error:", e.message);
-        createStandaloneToast.error({
+        toast.error({
           message: "Transaction Error",
           description: e.message,
         });

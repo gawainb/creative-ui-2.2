@@ -1,11 +1,11 @@
 import React from "react";
 
 import { Box, Badge, useToken, useColorModeValue } from "@chakra-ui/react";
-import Icon from "@chakra-ui/icon";
+import { StarIcon } from "@chakra-ui/icons";
 import ReactPlayer from 'react-player/lazy';
 import { useRouter } from 'next/router';
 
-const StarIcon = ({ color }) => <Icon name="star" color={color} />
+
 
 export default function LiveCampaigns() {
   const router = useRouter()
@@ -14,10 +14,11 @@ export default function LiveCampaigns() {
     imageAlt: "Pepsi Campaign",
     crtv: 40,
     apr: 18.78,
-    title: "Pepsi - That's What I Like",
+    brand: "Pepsi",
+    product: "That's What I Like",
     formattedPrice: "$20,100.00",
     reviewCount: 2,
-    rating: 3
+    rating: 4
   };
 
   const [brand400, brand200] = useToken(
@@ -53,7 +54,7 @@ export default function LiveCampaigns() {
       />
 
       <Box p="6">
-        <Box d="flex" alignItems="center">
+        <Box display="flex" alignItems="center">
           <Box
             color="gray.500"
             fontWeight="semibold"
@@ -71,10 +72,10 @@ export default function LiveCampaigns() {
           fontWeight="semibold"
           as="h2"
           lineHeight="1.5"
-          isTruncated
-          color="white"
+          color={useColorModeValue("black", "white")}
+          noOfLines={1}
         >
-          {property.title}
+          {property.brand} - {property.product}
         </Box>
 
         <Box color={useColorModeValue("black", "white")}>
@@ -89,7 +90,7 @@ export default function LiveCampaigns() {
           </Box>
         </Box>
 
-        <Box d="flex" mt="2" alignItems="center">
+        <Box display="flex" mt="2" alignItems="center">
           {Array(5)
             .fill("")
             .map((_, i) => (

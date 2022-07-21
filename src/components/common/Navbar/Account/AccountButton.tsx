@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useEthers, shortenAddress, useLookupAddress } from '@usedapp/core'
+import { useEthers, shortenAddress } from '@usedapp/core'
 import { Box, Button, chakra } from "@chakra-ui/react";
 
 import { AccountModal } from './AccountModal'
 
 export const AccountButton = () => {
   const { account, deactivate, activateBrowserWallet } = useEthers()
-  const ens = useLookupAddress()
   const [showModal, setShowModal] = useState(false)
 
   const [activateError, setActivateError] = useState('')
   const { error } = useEthers()
+  
   useEffect(() => {
     if (error) {
       setActivateError(error.message)
@@ -28,7 +28,7 @@ export const AccountButton = () => {
       {showModal && <AccountModal setShowModal={setShowModal} />}
       {account ? (
         <>
-          <AccountLabel onClick={() => setShowModal(!showModal)}>{ens ?? shortenAddress(account)}</AccountLabel>
+          <AccountLabel onClick={() => setShowModal(!showModal)}>{shortenAddress(account)}</AccountLabel>
           <LoginButton onClick={() => deactivate()}>Disconnect</LoginButton>
         </>
       ) : (
